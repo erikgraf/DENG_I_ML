@@ -1,0 +1,79 @@
+### configuration parameters ###
+
+# Base Box (the path to the base image)
+BASE_BOX_PATH = "../../ubuntu-19.10-base-i3.virtualbox.box"
+#BASE_BOX_PATH = "../../ubuntu-19.10-base-i3.vmware.box"
+
+# 
+VM_NAME = "DENG_I_ML_BASE_BOX"
+
+# RAM for Vagrant box
+RAM_MB = "6048"
+# number of CPUs for Vagrant box
+CPU_COUNT = "4"
+
+#|Start with GUI
+GUI_START = true
+
+# Requires the following vagrant version
+Vagrant.require_version ">= 2.2.6"
+
+
+### /configuration parameters ###
+Vagrant.configure("2") do |config|
+
+ config.vm.box = BASE_BOX_PATH
+ config.vm.define VM_NAME
+ 
+ # Configure the virtualbox specific values
+ config.vm.provider "virtualbox" do |vb|
+     # Display the VirtualBox GUI when booting the machine
+     vb.name = VM_NAME
+	 
+	 # Display settings
+	 vb.gui = GUI_START
+	 vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
+		# Change values below for a different startup resolution of the box
+	 vb.customize ['setextradata', :id, 'GUI/LastGuestSizeHint','1280,800']
+
+	 # Change the memory and amount of CPUS for the vm
+	 vb.cpus = CPU_COUNT
+	 vb.memory = RAM_MB
+	 
+	 # Enable copy paste and drag and drop between host and vm
+	 vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+         # using --clipboard-mode for virtualbox version > 6.1
+         #vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
+
+     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
+    
+	 
+	 # Performance improvements
+	 vb.customize ["modifyvm", :id, "--spec-ctrl", "off"]
+	 vb.customize ['modifyvm', :id, '--accelerate3d', 'on']
+     vb.customize ['modifyvm', :id, '--vram', '256']
+     vb.customize ['modifyvm', :id, '--bioslogofadein', 'off']
+     vb.customize ['modifyvm', :id, '--bioslogofadeout', 'off']
+     vb.customize ['modifyvm', :id, '--bioslogodisplaytime', '100']
+	 vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+    
+   end
+   
+  config.vm.provider "vmware_workstation" do |v|
+    v.name = VM_NAME
+    v.gui = GUI_START
+	clone_directory = "./vmware"
+	v.vmx["memsize"] = RAM_MB
+    v.vmx["numvcpus"] = CPU_COUNT
+	 
+   end
+  
+  # Provisioning required for running the pipeline.
+  config.vm.provision "shell", path: "setup.sh", privileged: false
+     
+  # Default Provisioning
+  config.vm.provision "file", source: "config", destination: "/home/vagrant/.config/i3/config"
+  config.vm.provision "file", source: "bg.jpg", destination: "/home/vagrant/bg.jpg"
+  config.vm.provision "file", source: "clone.sh", destination: "/home/vagrant/scripts/clone.sh"
+  config.vm.provision "file", source: "execute.sh", destination: "/home/vagrant/scripts/execute.sh"
+end
