@@ -1,7 +1,7 @@
 ### configuration parameters ###
 
 # Base Box (the path to the base image)
-BASE_BOX_PATH = "../../ubuntu-19.10-base-i3.virtualbox.box"
+BASE_BOX_PATH = "../ubuntu-19.10-base-i3.virtualbox.box"
 #BASE_BOX_PATH = "../../ubuntu-19.10-base-i3.vmware.box"
 
 # 
