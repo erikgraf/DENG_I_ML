@@ -4,8 +4,10 @@ set -x
 	
 	ENV_NAME=ML_Base
 
+	sudo echo "SET grub-pc/install_devices /dev/sda" | sudo debconf-communicate
+	sudo sed -i -e 's|eoan|focal|g' /etc/apt/sources.list 
 	sudo apt-get update -qq
-    sudo apt-get upgrade -qq
+    # sudo apt-get upgrade -qq
 
 	sudo apt-get install -y -qq firefox  
 	sudo apt-get install -y -qq open-vm-tools open-vm-tools-desktop

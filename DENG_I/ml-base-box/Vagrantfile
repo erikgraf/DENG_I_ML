@@ -5,7 +5,7 @@ BASE_BOX_PATH = "../ubuntu-19.10-base-i3.virtualbox.box"
 #BASE_BOX_PATH = "../../ubuntu-19.10-base-i3.vmware.box"
 
 # 
-VM_NAME = "DENG_I_ML_BASE_BOX"
+VM_NAME = "DENG_I_ML_BASE_BOX_FS21"
 
 # RAM for Vagrant box
 RAM_MB = "6048"
