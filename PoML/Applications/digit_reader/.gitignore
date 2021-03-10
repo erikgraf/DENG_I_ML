@@ -1,0 +1,15 @@
+# Files inside tmp folder and mnist data
+tmp
+MNIST_data
+./idea/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+/.idea/other.xml
+/.idea/modules.xml
+/.idea/MNIST_Digit_Reader.iml
+/.idea/misc.xml
+/.idea/workspace.xml
+/.idea/vcs.xml
