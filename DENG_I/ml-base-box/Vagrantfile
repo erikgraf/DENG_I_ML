@@ -5,12 +5,12 @@ BASE_BOX_PATH = "../ubuntu-19.10-base-i3.virtualbox.box"
 #BASE_BOX_PATH = "../../ubuntu-19.10-base-i3.vmware.box"
 
 # 
-VM_NAME = "DENG_I_ML_BASE_BOX_FS21"
+VM_NAME = "PoML_BASE_BOX_FS21"
 
 # RAM for Vagrant box
-RAM_MB = "6048"
+RAM_MB = "2048"
 # number of CPUs for Vagrant box
-CPU_COUNT = "4"
+CPU_COUNT = "2"
 
 #|Start with GUI
 GUI_START = true
@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
 	 
 	 # Performance improvements
 	 vb.customize ["modifyvm", :id, "--spec-ctrl", "off"]
-	 vb.customize ['modifyvm', :id, '--accelerate3d', 'on']
+	 vb.customize ['modifyvm', :id, '--accelerate3d', 'off']
      vb.customize ['modifyvm', :id, '--vram', '256']
      vb.customize ['modifyvm', :id, '--bioslogofadein', 'off']
      vb.customize ['modifyvm', :id, '--bioslogofadeout', 'off']
