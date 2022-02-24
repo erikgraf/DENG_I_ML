@@ -48,7 +48,7 @@ def train():
 
     print("Starting with model training.")
     from sklearn.linear_model import LogisticRegression
-    lr = LogisticRegression(C=100.0, random_state=1, solver='lbfgs', multi_class='ovr', max_iter=10000)
+    lr = LogisticRegression(C=100.0, random_state=1, solver='lbfgs', multi_class='ovr', max_iter=100)
     lr.fit(X, y)
     print("Finished with model training.")
     return lr
