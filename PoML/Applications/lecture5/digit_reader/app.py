@@ -36,7 +36,7 @@ def train():
     print("Downloading MNIST data set")
     try:
         from sklearn.datasets import fetch_openml
-        mnist = fetch_openml('mnist_784', version=1, cache=True)
+        mnist = fetch_openml('mnist_784', version=1, cache=True, as_frame=False)
         mnist.target = mnist.target.astype(np.int8)  # fetch_openml() returns targets as strings
     except ImportError:
         from sklearn.datasets import fetch_mldata
